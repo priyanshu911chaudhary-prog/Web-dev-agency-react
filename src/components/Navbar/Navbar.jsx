@@ -86,34 +86,38 @@ const Navbar = () => {
   }, { scope: navRef }); // Scoped to this component so it cleans itself up safely
 
   return (
-    <nav ref={navRef} className={`fixed top-0 left-0 w-full z-[10000] px-19 py-8 flex ${isHomePage ? 'justify-between' : 'justify-end'} items-center text-[#0D0D0D] font-sans text-[11px] md:text-[12px] uppercase tracking-widest font-medium pointer-events-auto will-change-transform`}>
+    <nav 
+      ref={navRef} 
+      className={`fixed top-0 left-0 w-full z-[10000] px-4 min-[400px]:px-6 md:px-12 lg:px-19 py-6 md:py-8 flex ${isHomePage ? 'justify-center md:justify-between' : 'justify-center md:justify-end'} items-center text-[#0D0D0D] font-sans text-[9.5px] min-[375px]:text-[10px] md:text-[11px] lg:text-[12px] tracking-wider md:tracking-widest font-medium pointer-events-auto will-change-transform`}
+    >
       
-      {/* Home keeps full metadata bar; inner pages use a clean navlinks-only bar. */}
+      {/* LEFT COLUMN: Progressively Hides on Smaller Screens */}
       {isHomePage && (
-        <div className="flex items-center gap-6">
+        <div className="hidden md:flex items-center gap-4 lg:gap-6">
           <div className="flex items-center gap-2">
             <span className="text-[8px] leading-none mb-[2px]">●</span>
             <span>GREATER NOIDA, IN</span>
           </div>
-          <div>{time}</div>
-          {/* Exact coordinates for Bennett University */}
-          <div className="hidden md:block">28.4500° N, 77.5800° E</div>
+          {/* Hides below 1024px */}
+          <div className="hidden lg:block">{time}</div>
+          {/* Hides below 1280px */}
+          <div className="hidden xl:block">28.4500° N, 77.5800° E</div>
         </div>
       )}
 
-      {/* Right Side: Links */}
-      <ul className="flex items-center gap-6">
+      {/* RIGHT COLUMN: Always Visible, Scales Down to Fit */}
+      <ul className="flex items-center gap-3 min-[400px]:gap-4 md:gap-6">
         <li>
-          <Link to="/" onClick={(event) => handleNavWithTransition(event, '/')} className="hover:opacity-60 transition-opacity">HOME</Link>
+          <Link to="/" onClick={(event) => handleNavWithTransition(event, '/')} className="hover:opacity-60 transition-opacity px-1 py-2">HOME</Link>
         </li>
         <li>
-          <Link to="/about" onClick={(event) => handleNavWithTransition(event, '/about')} className="hover:opacity-60 transition-opacity">ABOUT</Link>
+          <Link to="/about" onClick={(event) => handleNavWithTransition(event, '/about')} className="hover:opacity-60 transition-opacity px-1 py-2">ABOUT</Link>
         </li>
         <li>
-          <Link to="/contact" onClick={(event) => handleNavWithTransition(event, '/contact')} className="hover:opacity-60 transition-opacity">CONTACT</Link>
+          <Link to="/contact" onClick={(event) => handleNavWithTransition(event, '/contact')} className="hover:opacity-60 transition-opacity px-1 py-2">CONTACT</Link>
         </li>
         <li>
-          <Link to="/portal" onClick={(event) => handleNavWithTransition(event, '/portal')} className="hover:opacity-60 transition-opacity">PORTAL</Link>
+          <Link to="/portal" onClick={(event) => handleNavWithTransition(event, '/portal')} className="hover:opacity-60 transition-opacity px-1 py-2">PORTAL</Link>
         </li>
       </ul>
 

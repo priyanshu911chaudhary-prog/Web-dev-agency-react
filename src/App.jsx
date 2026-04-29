@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import ClientPortal from './pages/ClientPortal';
+import MobileOverlay from './components/MobileOverlay/MobileOverlay';
 
 const App = () => {
   const navigate = useNavigate();
@@ -95,6 +96,8 @@ const App = () => {
         ref={transitionOverlayRef}
         className="fixed inset-0 z-[110] scale-y-0 bg-black pointer-events-none"
       ></div>
+
+      <MobileOverlay />
     </>
   );
 };

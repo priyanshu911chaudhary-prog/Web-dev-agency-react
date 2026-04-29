@@ -36,6 +36,7 @@ const Loader = ({ onComplete }) => {
       if (onComplete) {
         onComplete();
       }
+      window.dispatchEvent(new CustomEvent('loaderComplete'));
     });
   }, { scope: loadingScreenRef, dependencies: [onComplete] });
 

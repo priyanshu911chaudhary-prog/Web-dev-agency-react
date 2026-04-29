@@ -51,17 +51,14 @@
 
 .team {
     height: 100svh;
+    display: flex;
+    gap: 1rem;
 }
 
 .hero .h1,
 .outro .h1 {
     width: 75%;
     color: var(--base-100);
-}
-
-.team {
-    display: flex;
-    gap: 1rem;
 }
 
 .teamMember {
@@ -72,19 +69,12 @@
     border: 2px dashed rgba(13, 13, 13, 0.15);
     border-radius: 1.5rem;
     will-change: transform;
+    transform: translatey(125%);
 }
 
-.teamMember:nth-child(1) {
-    z-index: 2;
-}
-
-.teamMember:nth-child(2) {
-    z-index: 1;
-}
-
-.teamMember:nth-child(3) {
-    z-index: 0;
-}
+.teamMember:nth-child(1) { z-index: 2; }
+.teamMember:nth-child(2) { z-index: 1; }
+.teamMember:nth-child(3) { z-index: 0; }
 
 .teamMemberNameInitial {
     position: absolute;
@@ -105,6 +95,7 @@
     font-size: 20rem;
     will-change: transform;
     color: var(--base-100);
+    transform: scale(0);
 }
 
 .teamMemberCard {
@@ -158,14 +149,6 @@
     margin-left: 0.5rem;
 }
 
-.teamMember {
-    transform: translatey(125%);
-}
-
-.teamMemberNameInitial .h1 {
-    transform: scale(0);
-}
-
 .teamMember:nth-child(1) .teamMemberCard {
     transform: translate(300%, -50%) scale(0.75) rotate(20deg);
 }
@@ -178,16 +161,14 @@
     transform: translate(100%, -50%) scale(0.75) rotate(20deg);
 }
 
+/* FIXED: Removed font-size: 5rem that was overriding Tailwind responsiveness */
 .outro {
     margin-top: 3rem;
-    font-size: 5rem;
-    font-weight: bold;
-    font-family: "Mango Grotesque" !important;
 }
 
 @media(max-width: 1000px) {
     .h1 {
-        font-size: 4rem;
+        font-size: clamp(2.5rem, 10vw, 4rem);
     }
 
     .hero .h1,
@@ -212,9 +193,31 @@
 
     .teamMember .teamMemberCard {
         transform: translate(-50%, -50%) scale(1) rotate(0deg) !important;
+        padding: 1.25rem;
+        gap: 1rem;
     }
 
+    /* Make image taller on mobile */
+    .teamMemberImg {
+        aspect-ratio: 4/5;
+        margin-bottom: 0.5rem;
+    }
+
+    /* Tighten gap to make room for new description on mobile */
+    .teamMemberInfo {
+        gap: 0.75rem;
+    }
+
+    /* Force names to wrap if they are too long, and scale size slightly */
     .teamMemberInfo .h1 {
-        font-size: 5rem;
+        font-size: clamp(1.75rem, 8vw, 4rem);
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        line-height: 1;
+    }
+    
+    .teamMemberInfo .h1 span {
+        margin-left: 0.4rem;
     }
 }

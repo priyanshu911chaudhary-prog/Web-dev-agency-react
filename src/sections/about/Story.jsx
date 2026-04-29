@@ -45,37 +45,37 @@ const Story = () => {
     }, { scope: sectionRef });
 
     return (
-        <section ref={sectionRef} className="mx-18 px-0 pt-17 pb-17 bg-transparent w-full my-12">
-				<div className="mt-8 flex flex-row gap-10 w-full max-[1000px]:flex-col">
-					<h2
-                        ref={titleRef}
-						className="text-[clamp(3rem,8vw,7.5rem)] leading-[0.88] tracking-[0.1em] text-[#0D0D0D] uppercase font-bold"
-						style={{ fontFamily: 'Major Mono Display, sans-serif' }}
-					>
-						CRAFTING
-						<br />
-						DIGITAL
-						<br />
-						LEGENDS
-					</h2>
-					<div className="max-w-2xl space-y-6 pr-11">
-						<p ref={p1Ref} className="font-sans text-[clamp(1.35rem,1.2vw,1.15rem)] leading-relaxed text-[#4a4a4a] text-center">
-							The Net-Craft Studio was built to turn bold ideas into high-performing digital experiences. We work at
-							the intersection of visual identity, interaction design, and technical precision to create work
-							that feels premium and performs in the real world.
-						</p>
-						<p ref={p2Ref} className="font-sans text-[clamp(1.35rem,1.2vw,1.15rem)] leading-relaxed text-[#4a4a4a] text-center">
-							Every project moves through a focused rhythm: strategy first, design with intention, and build
-							with performance at the core. That is how we help brands launch experiences people remember.
-						</p>
-						<div ref={listRef} className="flex items-center justify-center gap-4">
-							<p className="font-sans text-[11px] md:text-[12px] uppercase tracking-widest text-[#555]">
-								Strategy • Design • Build • Launch
-							</p>
-						</div>
-					</div>
-				</div>
-			</section>
+        <section ref={sectionRef} className="px-4 sm:px-8 md:px-12 lg:px-18 pt-12 lg:pt-17 pb-12 lg:pb-17 bg-transparent w-full my-8 lg:my-12 overflow-hidden">
+            <div className="mt-4 lg:mt-8 flex flex-col lg:flex-row gap-8 lg:gap-10 w-full">
+                <h2
+                    ref={titleRef}
+                    className="text-[clamp(3rem,8vw,7.5rem)] leading-[0.88] tracking-[0.1em] text-[#0D0D0D] uppercase font-bold text-center lg:text-left"
+                    style={{ fontFamily: 'Major Mono Display, sans-serif' }}
+                >
+                    CRAFTING
+                    <br />
+                    DIGITAL
+                    <br />
+                    LEGENDS
+                </h2>
+                <div className="max-w-2xl space-y-6 lg:pr-11 mx-auto lg:mx-0">
+                    <p ref={p1Ref} className="font-sans text-[clamp(1.15rem,3vw,1.35rem)] leading-relaxed text-[#4a4a4a] text-center lg:text-left">
+                        The Net-Craft Studio was built to turn bold ideas into high-performing digital experiences. We work at
+                        the intersection of visual identity, interaction design, and technical precision to create work
+                        that feels premium and performs in the real world.
+                    </p>
+                    <p ref={p2Ref} className="font-sans text-[clamp(1.15rem,3vw,1.35rem)] leading-relaxed text-[#4a4a4a] text-center lg:text-left">
+                        Every project moves through a focused rhythm: strategy first, design with intention, and build
+                        with performance at the core. That is how we help brands launch experiences people remember.
+                    </p>
+                    <div ref={listRef} className="flex items-center justify-center lg:justify-start gap-4">
+                        <p className="font-sans text-[10px] md:text-[12px] uppercase tracking-widest text-[#555]">
+                            Strategy • Design • Build • Launch
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
     )
 }
 

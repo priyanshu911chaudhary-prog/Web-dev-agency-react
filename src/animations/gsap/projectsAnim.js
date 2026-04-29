@@ -6,6 +6,15 @@ export function projectsScrollAnimation({
   projectImgRefs, projectNamesContainerRef, projectNameRefs,
   totalProjects, counterTextRef
 }) {
+  // --- RESPONSIVE HANDLER ---
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 250);
+  });
+
   const spotlightSection = sectionRef.current;
   const projectIndex = projectIndexRef.current;
   const projectImagesContainer = projectImagesContainerRef.current;

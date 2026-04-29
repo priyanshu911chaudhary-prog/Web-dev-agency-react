@@ -16,8 +16,6 @@ export function contactAnimation({
   let currentIconIndex = 1;
   let isAnimating = false;
   let lastSwitchTime = 0;
-  let bounceTween = null;
-  let releaseTimer = null;
 
   if (!contactInfoParent || !contentTrack || !activeLayer || !idleLayer || iconSources.length === 0) {
     return () => {};
@@ -73,60 +71,6 @@ export function contactAnimation({
     });
   }
 
-  function releaseRubberBand() {
-    if (bounceTween) {
-      bounceTween.kill();
-    }
-
-    bounceTween = gsap.to(contentTrack, {
-      y: 0,
-      duration: 0.7,
-      ease: 'back.out(1.8)'
-    });
-  }
-
-  function scheduleRelease() {
-    if (releaseTimer) {
-      clearTimeout(releaseTimer);
-    }
-
-    releaseTimer = setTimeout(() => {
-      releaseRubberBand();
-    }, 70);
-  }
-
-  function applyRubberBand(scrollState) {
-    if (!scrollState) {
-      return;
-    }
-
-    const { scroll = 0, limit = 0, velocity = 0 } = scrollState;
-    if (limit <= 0) {
-      return;
-    }
-
-    const isAtTopEdge = scroll <= 0.5 && velocity < 0;
-    const isAtBottomEdge = scroll >= limit - 0.5 && velocity > 0;
-
-    if (!isAtTopEdge && !isAtBottomEdge) {
-      if (Math.abs(gsap.getProperty(contentTrack, 'y')) > 0.1) {
-        scheduleRelease();
-      }
-      return;
-    }
-
-    if (bounceTween) {
-      bounceTween.kill();
-      bounceTween = null;
-    }
-
-    const maxOverscroll = window.innerWidth < 1000 ? 30 : 46;
-    const pull = Math.min(Math.abs(velocity) * 0.07, maxOverscroll);
-    const offsetY = isAtTopEdge ? pull : -pull;
-
-    gsap.set(contentTrack, { y: offsetY });
-    scheduleRelease();
-  }
 
   function getScrollBasedIconIndex(scrollState) {
     if (!scrollState || scrollState.limit <= 0) {
@@ -187,7 +131,6 @@ export function contactAnimation({
   // Subscribe to Lenis scroll event
   const handleLenisScroll = (state) => {
     updateContactAnimation(state);
-    applyRubberBand(state);
   };
 
   if (lenis) {
@@ -199,16 +142,6 @@ export function contactAnimation({
 
   // Return strictly the cleanup function
   return () => {
-    if (releaseTimer) {
-      clearTimeout(releaseTimer);
-    }
-
-    if (bounceTween) {
-      bounceTween.kill();
-    }
-
-    gsap.set(contentTrack, { y: 0 });
-
     if (lenis) {
       lenis.off('scroll', handleLenisScroll);
     }

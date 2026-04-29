@@ -67,11 +67,12 @@ const Contact = () => {
   }, { scope: contactInfoParentRef, dependencies: [lenis] });
 
   return (
-    <main className="relative w-full min-h-screen bg-transparent">
+    <main className="relative w-full min-h-screen bg-transparent overflow-x-hidden">
       <Navbar />
+      
       {/* Background visual container (fixed) */}
       <section className="fixed top-0 left-0 w-full h-[100svh] flex items-center justify-center overflow-hidden bg-transparent pointer-events-none z-0">
-        <div className="relative w-[7rem] h-[7rem] max-[1000px]:w-[4rem] max-[1000px]:h-[4rem]">
+        <div className="relative w-[4rem] md:w-[7rem] h-[4rem] md:h-[7rem]">
           {/* Layer A (Active) */}
           <img
             ref={iconLayerARef}
@@ -94,19 +95,19 @@ const Contact = () => {
         ref={contactInfoParentRef}
         className="relative w-full flex flex-col justify-center overflow-hidden z-10 pt-[50svh] pb-[50svh]"
       >
-        <div className="w-full flex flex-col justify-center gap-[1.5rem] py-12">
+        <div className="w-full max-w-7xl mx-auto flex flex-col justify-center gap-[1.5rem] py-12 px-4 sm:px-8">
           {baseContactData.map((item, index) => (
             <div
               key={`row-${index}`}
               ref={(el) => {
                 rowRefs.current[index] = el;
               }}
-              className="flex justify-center items-center min-h-[2rem] gap-[1rem] will-change-[gap]"
+              className="flex justify-center items-center min-h-[2rem] gap-[1rem] will-change-[gap] w-full"
             >
-              <p className="flex-1 min-w-0 text-[1.4rem] max-[1000px]:text-[1rem] font-normal leading-[0.95] tracking-[-0.025rem] text-right text-[#0D0D0D]">
+              <p className="flex-1 min-w-0 text-[10px] min-[375px]:text-[11px] sm:text-[14px] md:text-[1rem] lg:text-[1.4rem] font-bold leading-normal md:leading-[0.95] tracking-[-0.025rem] text-right text-[#0D0D0D] break-words">
                 {item.label}
               </p>
-              <p className="flex-1 min-w-0 text-[1.4rem] max-[1000px]:text-[1rem] font-normal leading-[0.95] tracking-[-0.025rem] text-left text-[#4a4a4a]">
+              <p className="flex-1 min-w-0 text-[10px] min-[375px]:text-[11px] sm:text-[14px] md:text-[1rem] lg:text-[1.4rem] font-normal leading-normal md:leading-[0.95] tracking-[-0.025rem] text-left text-[#4a4a4a] break-words">
                 {item.label === "Current Time" ? currentTime : item.value}
               </p>
             </div>

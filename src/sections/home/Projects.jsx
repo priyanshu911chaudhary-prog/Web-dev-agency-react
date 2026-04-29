@@ -109,22 +109,22 @@ const ProjectCard = forwardRef(({ project, isFirst }, ref) => {
       
       <div 
         ref={hoverBoardRef}
-        className="hover-board absolute inset-0 bg-transparent flex flex-col justify-center items-center p-6 sm:p-10 text-center pointer-events-none"
+        className="hover-board absolute inset-0 bg-transparent flex flex-col justify-center items-center p-4 sm:p-10 text-center pointer-events-none"
         style={{ clipPath: 'circle(0% at 50% 50%)' }}
       >
-         <div className="flex flex-wrap justify-center gap-x-[0.3em] gap-y-1 max-w-[90%] pointer-events-none">
+         <div className="flex flex-wrap justify-center gap-x-[0.3em] gap-y-1 max-w-[95%] sm:max-w-[90%] pointer-events-none">
            {words.map((word, i) => (
-             <span key={i} className="overflow-hidden inline-block leading-tight text-[#0D0D0D] text-[1rem] sm:text-[1.2rem] lg:text-[1.5rem] font-sans font-light tracking-wide">
+             <span key={i} className="overflow-hidden inline-block leading-tight text-[#0D0D0D] text-[0.8rem] sm:text-[1.2rem] lg:text-[1.5rem] font-sans font-light tracking-wide">
                <span ref={addWordRef} className="hover-word inline-block translate-y-[110%]">{word}</span>
              </span>
            ))}
          </div>
          
-         <a href="#works" className="mt-8 sm:mt-10 group/btn relative inline-block text-[#0D0D0D] text-[11px] md:text-[12px] uppercase tracking-widest font-medium overflow-hidden hover:opacity-60 transition-opacity pointer-events-auto">
+         <a href="#works" className="mt-4 sm:mt-10 group/btn relative inline-block text-[#0D0D0D] text-[9px] sm:text-[11px] md:text-[12px] uppercase tracking-widest font-medium overflow-hidden hover:opacity-60 transition-opacity pointer-events-auto min-h-[44px] min-w-[44px] flex items-center justify-center">
            <span ref={hoverBtnRef} className="hover-btn inline-block translate-y-[110%] pb-1">
              VIEW PROJECT
            </span>
-           <span ref={btnLineRef} className="btn-line absolute bottom-0 left-0 w-full h-[1px] bg-[#0D0D0D] origin-left scale-x-0"></span>
+           <span ref={btnLineRef} className="btn-line absolute bottom-2 left-0 w-full h-[1px] bg-[#0D0D0D] origin-left scale-x-0"></span>
          </a>
       </div>
     </div>
@@ -169,20 +169,20 @@ const Projects = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full h-[100svh] p-8 overflow-hidden bg-transparent"
+      className="relative w-full h-[100svh] p-4 sm:p-8 overflow-hidden bg-transparent"
       style={{ contain: 'layout paint' }}
     >
       {/* Project Counter */}
-      <div className="absolute top-8 left-8">
+      <div className="absolute top-4 sm:top-8 left-4 sm:left-8 z-10 pointer-events-none">
         <h1
           ref={projectIndexRef}
           className="h1forproject flex items-baseline text-[#0D0D0D] uppercase leading-none"
           style={{ willChange: 'transform' }}
         >
-          <span ref={counterTextRef} className="text-[clamp(5rem,7vw,11rem)] leading-none">
+          <span ref={counterTextRef} className="text-[clamp(3.5rem,7vw,11rem)] leading-none">
             01
           </span>
-          <span className="text-[clamp(2rem,3vw,4rem)] leading-none text-[#555] ml-1 sm:ml-2">
+          <span className="text-[clamp(1.5rem,3vw,4rem)] leading-none text-[#555] ml-1 sm:ml-2">
             /{projects.length}
           </span>
         </h1>
@@ -191,7 +191,7 @@ const Projects = () => {
       {/* Project Images */}
       <div
         ref={projectImagesContainerRef}
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[35%] max-[1000px]:w-[calc(100%-4rem)] py-[50svh] flex flex-col gap-2 max-[1000px]:gap-[25svh] -z-10"
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[85%] md:w-[60%] lg:w-[35%] py-[50svh] flex flex-col gap-[15svh] md:gap-[20svh] lg:gap-2 -z-10"
         style={{ willChange: 'transform' }}
       >
         {projects.map((project, index) => (
@@ -202,13 +202,13 @@ const Projects = () => {
       {/* Project Names */}
       <div
         ref={projectNamesContainerRef}
-        className="absolute right-8 bottom-8 flex flex-col items-end"
+        className="absolute right-4 sm:right-8 bottom-4 sm:bottom-8 flex flex-col items-end z-10 pointer-events-none"
       >
         {projects.map((project) => (
           <p
             key={`name-${project.id}`}
             ref={addNameRef}
-            className="pforproject text-[clamp(1.8rem,3vw,3.5rem)] font-light tracking-tight leading-[1.2] text-[#A0A0A0] max-[1000px]:!text-[#0D0D0D] whitespace-nowrap transition-colors duration-300"
+            className="pforproject text-[clamp(1.2rem,6vw,3.5rem)] font-light tracking-tight leading-[1.2] text-[#A0A0A0] max-[1000px]:!text-[#0D0D0D] whitespace-nowrap transition-colors duration-300"
             style={{ willChange: 'transform' }}
           >
             {project.name}

@@ -8,9 +8,30 @@ import imgB from '../../assets/images/team-img/b.jpg';
 import imgE from '../../assets/images/team-img/e.jpg';
 
 const teamMembers = [
-    { initial: "P", role: "(Creative Director)", firstName: "Priyanshu", lastName: "Chaudhary", image: imgC },
-    { initial: "A", role: "(Lead Developer)", firstName: "Aryan", lastName: "Sharma", image: imgB },
-    { initial: "S", role: "(Head of Design)", firstName: "Sahil", lastName: "Verma", image: imgE },
+    { 
+        initial: "P", 
+        role: "(Principal Engineer)", 
+        firstName: "Marcus", 
+        lastName: "Sterling", 
+        image: imgC,
+        description: "Architecting robust, scalable backend systems while seamlessly integrating high-performance frontend experiences."
+    },
+    { 
+        initial: "A", 
+        role: "(Lead UI/UX Designer)", 
+        firstName: "Julian", 
+        lastName: "Vance", 
+        image: imgB,
+        description: "Crafting immersive, user-centric interfaces with a deep focus on modern aesthetics and interaction design."
+    },
+    { 
+        initial: "S", 
+        role: "(Head of Strategy)", 
+        firstName: "Elena", 
+        lastName: "Rostova", 
+        image: imgE,
+        description: "Directing long-term vision and driving impactful, scalable growth strategies across the organization."
+    },
 ];
 
 const Team = () => {
@@ -18,8 +39,6 @@ const Team = () => {
     const memberRefs = useRef([]);
     const cardRefs = useRef([]);
     const initialRefs = useRef([]);
-
-    // Ref callbacks integrated directly to satisfy linter
 
     useGSAP(() => {
         const cleanup = teamAnimation({
@@ -32,18 +51,18 @@ const Team = () => {
         return () => {
             if (cleanup) cleanup();
         };
-    }, { scope: sectionRef }); // CRITICAL: Removed dependencies: [lenis] to prevent constant recreation of animations on scroll
+    }, { scope: sectionRef });
 
     return (
-        <div className={`${styles.container} mt-12`}>
+        <div className={`${styles.container} mt-8 lg:mt-12`}>
 
             {/* --- INTRO SECTION --- */}
             <section className={`${styles.section} ${styles.hero}`}>
-                <div className="flex flex-col items-center justify-center gap-4 max-w-3xl px-4">
-                    <h2 className="text-[11px] md:text-[6.5rem] uppercase tracking-wide text-[#555] font-bold" style={{ fontFamily: "Mango Grotesque" }}>
+                <div className="flex flex-col items-center justify-center gap-4 max-w-3xl px-4 sm:px-6">
+                    <h2 className="text-[clamp(3.5rem,12vw,6.5rem)] leading-[0.8] uppercase tracking-wide text-[#555] font-bold text-center" style={{ fontFamily: "Mango Grotesque" }}>
                         Meet The Team
                     </h2>
-                    <p className="font-sans text-[clamp(1.35rem,1.2vw,1.15rem)] leading-[2rem] text-[#4a4a4a] text-center">
+                    <p className="font-sans text-[clamp(1.15rem,3vw,1.35rem)] leading-[1.6rem] md:leading-[2rem] text-[#4a4a4a] text-center">
                         Our team is a collective of visionary designers, meticulous developers, and strategic thinkers.
                         We bring diverse perspectives together to craft digital experiences that resonate and inspire.
                     </p>
@@ -89,6 +108,10 @@ const Team = () => {
                                 <h1 className={styles.h1}>
                                     {member.firstName} <span>{member.lastName}</span>
                                 </h1>
+                                {/* Description */}
+                                <p className="font-sans text-[0.8rem] md:text-[0.9rem] leading-relaxed text-[#555] max-w-[85%] mx-auto mt-2">
+                                    {member.description}
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -96,10 +119,10 @@ const Team = () => {
             </section>
 
             {/* --- OUTRO SECTION --- */}
-            <section className={`${styles.section} ${styles.outro}`}>
-                <div className="flex flex-col items-center justify-center gap-6 max-w-4xl px-4">
+            <section className={`${styles.section} ${styles.outro} py-16 md:py-24`}>
+                <div className="flex flex-col items-center justify-center gap-4 md:gap-6 w-full max-w-4xl px-4 sm:px-6 mx-auto">
                     <h2
-                        className="text-[clamp(3rem,6vw,5rem)] leading-[0.88] tracking-[0.1em] text-[#0D0D0D] uppercase font-bold text-center"
+                        className="w-full text-[clamp(1.8rem,10vw,5rem)] leading-[0.95] md:leading-[0.88] tracking-[0.05em] md:tracking-[0.1em] text-[#0D0D0D] uppercase font-bold text-center break-words sm:break-normal"
                         style={{ fontFamily: 'Akkurat-Bold, sans-serif' }}
                     >
                         LET'S BUILD
@@ -108,7 +131,7 @@ const Team = () => {
                         <br />
                         EXTRAORDINARY
                     </h2>
-                    <p className="font-[Boldonsemi_bold] text-[clamp(1.35rem,1.2vw,1.15rem)] leading-relaxed text-[#4a4a4a] text-center mt-4">
+                    <p className="font-[Boldonsemi_bold] text-[clamp(1rem,4vw,1.35rem)] leading-relaxed text-[#4a4a4a] text-center mt-2 md:mt-4 px-2">
                         We are always looking for passionate individuals to join our hive.
                     </p>
                 </div>
