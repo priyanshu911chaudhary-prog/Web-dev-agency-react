@@ -1,0 +1,220 @@
+.container {
+    --base-100: #0D0D0D;
+    --base-200: #f4f4f5;
+    --base-300: #fc694c;
+    background-color: transparent;
+    color: var(--base-100);
+    font-family: sans-serif;
+    width: 100%;
+}
+
+.img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.h1 {
+    font-family: 'Anton', sans-serif;
+    text-transform: uppercase;
+    font-size: 12rem;
+    font-weight: 800;
+    line-height: 0.8;
+    margin: 0;
+}
+
+.p {
+    font-family: 'Roboto Mono', monospace;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    font-weight: 500;
+    line-height: 1;
+    margin: 0;
+}
+
+.section {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 1rem;
+}
+
+.hero,
+.outro {
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0rem 1rem;
+}
+
+.team {
+    height: 100svh;
+}
+
+.hero .h1,
+.outro .h1 {
+    width: 75%;
+    color: var(--base-100);
+}
+
+.team {
+    display: flex;
+    gap: 1rem;
+}
+
+.teamMember {
+    flex: 1;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border: 2px dashed rgba(13, 13, 13, 0.15);
+    border-radius: 1.5rem;
+    will-change: transform;
+}
+
+.teamMember:nth-child(1) {
+    z-index: 2;
+}
+
+.teamMember:nth-child(2) {
+    z-index: 1;
+}
+
+.teamMember:nth-child(3) {
+    z-index: 0;
+}
+
+.teamMemberNameInitial {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border-radius: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: -1;
+}
+
+.teamMemberNameInitial .h1 {
+    font-size: 20rem;
+    will-change: transform;
+    color: var(--base-100);
+}
+
+.teamMemberCard {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    background: rgba(255, 255, 255, 0.85);
+    border: 2px solid black;
+    border-radius: 1.5rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    will-change: transform;
+    z-index: 1;
+}
+
+.teamMemberImg {
+    aspect-ratio: 1;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    width: 100%;
+}
+
+.teamMemberInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 2.0rem;
+}
+
+.teamMemberInfo .h1 {
+    font-size: 3.5rem;
+    color: var(--base-100);
+}
+
+.teamMemberInfo .h1 span,
+.teamMemberInfo .p {
+    color: #555;
+    display: flex;
+}
+
+.teamMemberInfo .h1 span {
+    margin-left: 0.5rem;
+}
+
+.teamMember {
+    transform: translatey(125%);
+}
+
+.teamMemberNameInitial .h1 {
+    transform: scale(0);
+}
+
+.teamMember:nth-child(1) .teamMemberCard {
+    transform: translate(300%, -50%) scale(0.75) rotate(20deg);
+}
+
+.teamMember:nth-child(2) .teamMemberCard {
+    transform: translate(200%, -50%) scale(0.75) rotate(20deg);
+}
+
+.teamMember:nth-child(3) .teamMemberCard {
+    transform: translate(100%, -50%) scale(0.75) rotate(20deg);
+}
+
+.outro {
+    margin-top: 3rem;
+    font-size: 5rem;
+    font-weight: bold;
+    font-family: "Mango Grotesque" !important;
+}
+
+@media(max-width: 1000px) {
+    .h1 {
+        font-size: 4rem;
+    }
+
+    .hero .h1,
+    .outro .h1 {
+        width: 100%;
+    }
+
+    .team {
+        height: 250svh;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .teamMember {
+        max-width: 400px;
+        transform: translateY(0%) !important;
+    }
+
+    .teamMemberNameInitial .h1 {
+        transform: scale(1);
+    }
+
+    .teamMember .teamMemberCard {
+        transform: translate(-50%, -50%) scale(1) rotate(0deg) !important;
+    }
+
+    .teamMemberInfo .h1 {
+        font-size: 5rem;
+    }
+}
