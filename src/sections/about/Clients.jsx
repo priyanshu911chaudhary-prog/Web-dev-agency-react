@@ -1,3 +1,6 @@
+import { useRef, useEffect } from 'react';
+import gsap from 'gsap';
+
 import atlassian from '../../assets/images/brand-logo/atlassian_2024-logo_brandlogos.net_lqsq6.png';
 import cursor from '../../assets/images/brand-logo/cursor_code_editor-logo_brandlogos.net_rt3vi.png';
 import paypal from '../../assets/images/brand-logo/paypal_2014-logo_brandlogos.net_r9meu.png';
@@ -31,41 +34,95 @@ const row2Logos = [
   { id: 12, src: facebook, alt: "Client 12", className: "h-8 min-[400px]:h-10 md:h-16" },
 ];
 
-const Clients = () => {
-  const renderLogo = (logo) => (
-    <div key={logo.id} className="flex-shrink-0 flex items-center justify-center">
-      {logo.src ? (
-        <img
-          src={logo.src}
-          alt={logo.alt}
-          className={`${logo.className || "h-8 md:h-12"} w-auto object-contain filter grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300`}
-          loading="lazy"
-        />
-      ) : (
-        <div className="w-24 md:w-28 h-8 md:h-10 bg-[#0D0D0D]/[0.06] rounded-sm flex items-center justify-center text-[9px] md:text-[10px] uppercase tracking-widest text-[#0D0D0D]/25">
-          {logo.alt}
-        </div>
-      )}
+const renderLogo = (logo) => (
+  <div key={logo.id} className="flex-shrink-0 flex items-center justify-center px-6 md:px-10 lg:px-12">
+    {logo.src ? (
+      <img
+        src={logo.src}
+        alt={logo.alt}
+        className={`${logo.className || "h-8 md:h-12"} w-auto object-contain filter grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300`}
+        loading="lazy"
+      />
+    ) : (
+      <div className="w-24 md:w-28 h-8 md:h-10 bg-[#0D0D0D]/[0.06] rounded-sm flex items-center justify-center text-[9px] md:text-[10px] uppercase tracking-widest text-[#0D0D0D]/25">
+        {logo.alt}
+      </div>
+    )}
+  </div>
+);
+
+// Reusable marquee row driven by GSAP for pixel-perfect, jank-free looping
+const MarqueeRow = ({ logos, direction = 'left', speed = 30 }) => {
+  const trackRef = useRef(null);
+  const tweenRef = useRef(null);
+
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    // Measure the width of ONE set of logos (the first half of children)
+    const totalChildren = track.children.length;
+    const singleSetCount = totalChildren / 2;
+    let singleSetWidth = 0;
+    for (let i = 0; i < singleSetCount; i++) {
+      singleSetWidth += track.children[i].offsetWidth;
+    }
+
+    // Duration = distance / speed (pixels per second)
+    const duration = singleSetWidth / speed;
+
+    // Set initial position for reverse direction
+    if (direction === 'right') {
+      gsap.set(track, { x: -singleSetWidth });
+    }
+
+    // GSAP tween for buttery smooth, GPU-composited infinite loop
+    tweenRef.current = gsap.to(track, {
+      x: direction === 'left' ? -singleSetWidth : 0,
+      duration,
+      ease: 'none',
+      repeat: -1,
+      force3D: true, // GPU compositing
+    });
+
+    // Pause on hover
+    const handleEnter = () => gsap.to(tweenRef.current, { timeScale: 0, duration: 0.6, ease: 'power2.out' });
+    const handleLeave = () => gsap.to(tweenRef.current, { timeScale: 1, duration: 0.6, ease: 'power2.out' });
+
+    track.addEventListener('mouseenter', handleEnter);
+    track.addEventListener('mouseleave', handleLeave);
+
+    return () => {
+      tweenRef.current?.kill();
+      track.removeEventListener('mouseenter', handleEnter);
+      track.removeEventListener('mouseleave', handleLeave);
+    };
+  }, [direction, speed]);
+
+  return (
+    <div className="overflow-hidden w-full">
+      <div ref={trackRef} className="flex w-max will-change-transform">
+        {logos.map(renderLogo)}
+        {logos.map((logo) => renderLogo({ ...logo, id: `${logo.id}-dup` }))}
+      </div>
     </div>
   );
+};
 
+const Clients = () => {
   return (
     <section className="bg-transparent pt-0 pb-10 overflow-hidden w-full my-8 lg:my-12">
       <h2 className="font-sans text-[clamp(14px,4vw,1.1rem)] uppercase tracking-widest text-[#555] mx-4 md:mx-8 lg:mx-14 px-0 lg:px-6 mb-8 lg:mb-12 font-bold text-center lg:text-left" style={{ fontFamily: "Major Mono Display, sans-serif" }}>
         Trusted by great brands
       </h2>
 
-      {/* Row 1 */}
-      <div className="flex w-max animate-marquee mb-4 md:mb-6 gap-8 md:gap-12 lg:gap-16">
-        {row1Logos.map(renderLogo)}
-        {row1Logos.map((logo) => renderLogo({ ...logo, id: `${logo.id}-dup` }))}
+      {/* Row 1 — moves left */}
+      <div className="mb-4 md:mb-6">
+        <MarqueeRow logos={row1Logos} direction="left" speed={35} />
       </div>
 
-      {/* Row 2 */}
-      <div className="flex w-max animate-marquee-slow gap-8 md:gap-12 lg:gap-16">
-        {row2Logos.map(renderLogo)}
-        {row2Logos.map((logo) => renderLogo({ ...logo, id: `${logo.id}-dup` }))}
-      </div>
+      {/* Row 2 — moves right (opposing direction for premium feel) */}
+      <MarqueeRow logos={row2Logos} direction="right" speed={25} />
     </section>
   );
 };

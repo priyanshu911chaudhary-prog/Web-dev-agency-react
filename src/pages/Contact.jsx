@@ -102,7 +102,7 @@ const Contact = () => {
               ref={(el) => {
                 rowRefs.current[index] = el;
               }}
-              className="flex justify-center items-center min-h-[2rem] gap-[1rem] will-change-[gap] w-full"
+              className="flex justify-center items-center min-h-[2rem] gap-[1rem] w-full"
             >
               <p className="flex-1 min-w-0 text-[10px] min-[375px]:text-[11px] sm:text-[14px] md:text-[1rem] lg:text-[1.4rem] font-bold leading-normal md:leading-[0.95] tracking-[-0.025rem] text-right text-[#0D0D0D] break-words">
                 {item.label}

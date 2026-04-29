@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { FaCircleInfo, FaEnvelope, FaInstagram, FaXTwitter, FaLinkedinIn, FaGithub } from 'react-icons/fa6';
+import { FaInstagram, FaXTwitter, FaLinkedinIn, FaGithub } from 'react-icons/fa6';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 
@@ -63,12 +63,7 @@ const Footer = () => {
 
       {/* Social Icons Row */}
       <div ref={socialRef} className="flex items-center justify-center gap-8 mt-8">
-        <a href="#about" className="text-[#0D0D0D] text-[22px] hover:opacity-60 transition-opacity duration-300" aria-label="About">
-          <FaCircleInfo />
-        </a>
-        <a href="#contact" className="text-[#0D0D0D] text-[22px] hover:opacity-60 transition-opacity duration-300" aria-label="Contact">
-          <FaEnvelope />
-        </a>
+
         <a href="#" className="text-[#0D0D0D] text-[22px] hover:opacity-60 transition-opacity duration-300" aria-label="Instagram">
           <FaInstagram />
         </a>

@@ -35,30 +35,42 @@ const MobileOverlay = () => {
 
   return (
     <div className="fixed inset-0 z-[99999] bg-[#0D0D0D] text-[#F0EDE6] flex flex-col items-center justify-center p-8 text-center">
-      <div className="max-w-md flex flex-col items-center gap-6">
+      <div className="max-w-sm flex flex-col items-center gap-8">
+        
+        {/* Decorative line */}
+        <div className="w-12 h-[1px] bg-[#F0EDE6]/20" />
+
         <h2 
-          className="text-[2.5rem] md:text-[3rem] font-bold uppercase tracking-tight leading-none" 
+          className="text-[1.8rem] font-bold uppercase tracking-tight leading-[1.1]" 
           style={{ fontFamily: 'Major Mono Display, sans-serif' }}
         >
-          Notice
+          Best on Desktop
         </h2>
         
-        <div className="font-sans text-[1.1rem] leading-relaxed text-[#A0A0A0] text-left space-y-4">
-          <p className="text-[#F0EDE6] font-medium tracking-wide uppercase text-[0.8rem]">By the creator:</p>
+        <div className="font-sans text-[0.95rem] leading-[1.7] text-[#A0A0A0] text-center space-y-5">
           <p>
-            This website is made to showcase web animation mastery and is heavily inspired by Awwwards websites. 
+            This site is a showcase of advanced web animation and interaction design, inspired by award-winning digital experiences.
           </p>
           <p>
-            I highly recommend you to please open it on <strong className="text-[#F0EDE6]">desktop</strong> as I have restricted many of the animations on mobile due to performance issues and complex animations.
+            For the full experience — smooth scroll-driven sequences, cinematic transitions, and interactive elements — please visit on a <strong className="text-[#F0EDE6]">desktop browser</strong>.
+          </p>
+          <p className="text-[0.8rem] text-[#666] tracking-wide">
+            Some animations have been simplified on mobile for performance.
           </p>
         </div>
 
-        <button 
-          onClick={handleContinue}
-          className="mt-6 px-8 py-4 bg-[#F0EDE6] text-[#0D0D0D] rounded-full text-[12px] font-bold uppercase tracking-widest hover:bg-[#d0ccc3] transition-colors w-full sm:w-auto"
-        >
-          Continue with Mobile
-        </button>
+        <div className="flex flex-col items-center gap-3 w-full mt-2">
+          <button 
+            onClick={handleContinue}
+            className="px-8 py-4 bg-[#F0EDE6] text-[#0D0D0D] rounded-full text-[11px] font-bold uppercase tracking-[0.15em] hover:bg-[#d0ccc3] transition-colors w-full"
+          >
+            Continue Anyway
+          </button>
+          <span className="text-[10px] text-[#555] tracking-widest uppercase">
+            — Priyanshu Chaudhary
+          </span>
+        </div>
+
       </div>
     </div>
   );

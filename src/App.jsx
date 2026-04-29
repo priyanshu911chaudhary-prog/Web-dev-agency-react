@@ -6,6 +6,7 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import ClientPortal from './pages/ClientPortal';
 import MobileOverlay from './components/MobileOverlay/MobileOverlay';
+import CustomCursor from './components/CustomCursor/CustomCursor';
 
 const App = () => {
   const navigate = useNavigate();
@@ -98,6 +99,7 @@ const App = () => {
       ></div>
 
       <MobileOverlay />
+      <CustomCursor />
     </>
   );
 };

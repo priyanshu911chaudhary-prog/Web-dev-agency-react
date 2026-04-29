@@ -5,6 +5,17 @@
     <link rel="icon" type="image/svg+xml" href="/src/assets/coding.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Net-Craft Studio</title>
+    <script>
+      // Only show black background on first home visit (preloader).
+      // On all other routes or return visits, body stays transparent.
+      (function() {
+        var isHome = window.location.pathname === '/' || window.location.pathname === '';
+        var loaderDone = sessionStorage.getItem('home-loader-complete') === '1';
+        if (isHome && !loaderDone) {
+          document.documentElement.style.backgroundColor = '#000';
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

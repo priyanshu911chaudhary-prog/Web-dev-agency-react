@@ -83,13 +83,14 @@ export function contactAnimation({
     return segmentIndex + 1;
   }
 
-  function updateContactAnimation(scrollState) {
-    const isMobile = window.innerWidth < 1000;
-    const minGap = isMobile ? 1 : 1.15;
-    const maxGap = isMobile ? 4.8 : 9;
-    const gapActivationDistance = isMobile ? 160 : 195;
-    const gapEasePower = 1.25;
+  // Pre-compute constants once (not per-frame)
+  const isMobile = window.innerWidth < 1000;
+  const minGap = isMobile ? 1 : 1.15;
+  const maxGap = isMobile ? 4.8 : 9;
+  const gapActivationDistance = isMobile ? 160 : 195;
+  const gapEasePower = 1.25;
 
+  function updateContactAnimation(scrollState) {
     const centerY = window.innerHeight / 2;
     let closestDist = Infinity;
     let closestIndex = -1;
@@ -128,9 +129,23 @@ export function contactAnimation({
     }
   }
 
-  // Subscribe to Lenis scroll event
+  // rAF throttle on mobile to prevent scroll handler pile-up during touch inertia
+  let ticking = false;
+  let latestScrollState = null;
+
   const handleLenisScroll = (state) => {
-    updateContactAnimation(state);
+    if (isMobile) {
+      latestScrollState = state;
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(() => {
+          updateContactAnimation(latestScrollState);
+          ticking = false;
+        });
+      }
+    } else {
+      updateContactAnimation(state);
+    }
   };
 
   if (lenis) {

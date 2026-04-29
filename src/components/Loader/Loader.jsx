@@ -32,6 +32,8 @@ const Loader = ({ onComplete }) => {
     };
 
     runPreloaderAnim(domRefs, () => {
+      // Clear the pre-render black background
+      document.documentElement.style.backgroundColor = '';
       setIsFinished(true);
       if (onComplete) {
         onComplete();
