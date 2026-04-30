@@ -9,7 +9,7 @@ import imgE from '../../assets/images/team-img/e.jpg';
 
 const teamMembers = [
     { 
-        initial: "P", 
+        initial: "M", 
         role: "(Principal Engineer)", 
         firstName: "Marcus", 
         lastName: "Sterling", 
@@ -17,7 +17,7 @@ const teamMembers = [
         description: "Architecting robust, scalable backend systems while seamlessly integrating high-performance frontend experiences."
     },
     { 
-        initial: "A", 
+        initial: "J", 
         role: "(Lead UI/UX Designer)", 
         firstName: "Julian", 
         lastName: "Vance", 
@@ -25,7 +25,7 @@ const teamMembers = [
         description: "Crafting immersive, user-centric interfaces with a deep focus on modern aesthetics and interaction design."
     },
     { 
-        initial: "S", 
+        initial: "E", 
         role: "(Head of Strategy)", 
         firstName: "Elena", 
         lastName: "Rostova", 

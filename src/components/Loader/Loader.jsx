@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useGSAP } from '@gsap/react';
 import { runPreloaderAnim } from '../../animations/loaders/preloaderAnim';
 
@@ -20,6 +20,13 @@ const Loader = ({ onComplete }) => {
       digitsRef.current.push(el);
     }
   };
+
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, []);
 
   useGSAP(() => {
     // Pass the actual DOM elements to the animation function
@@ -47,7 +54,7 @@ const Loader = ({ onComplete }) => {
   return (
     <div 
       ref={loadingScreenRef}
-      className="fixed inset-0 w-full h-full bg-black text-white pointer-events-none z-[100]"
+      className="fixed inset-0 w-full h-[100dvh] bg-black text-white touch-none z-[100] flex flex-col"
     >
       <div className="fixed left-[50px] bottom-[50px] flex gap-[8px] h-[100px] text-[100px] leading-[102px] font-['Helvetica_Neue',_'Segoe_UI',_Arial,_sans-serif] font-light antialiased [clip-path:polygon(0_0,100%_0,100%_100px,0_100px)]">
         

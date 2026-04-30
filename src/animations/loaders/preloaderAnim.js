@@ -17,7 +17,8 @@ export const runPreloaderAnim = (refs, onComplete) => {
 
   const getCriticalImages = () => {
     // Only wait for eager loaded images (exclude lazy ones to prevent infinite hangs)
-    return Array.from(document.querySelectorAll('img')).filter(img => img.loading !== 'lazy');
+    // Also ensure the image has a src attribute, otherwise load/error events may never fire
+    return Array.from(document.querySelectorAll('img')).filter(img => img.loading !== 'lazy' && img.src);
   };
 
   tl.to(counter3, { y: () => getScrollDist(counter3), duration: 5, ease: "power4.inOut" }, 0)
@@ -44,7 +45,12 @@ export const runPreloaderAnim = (refs, onComplete) => {
           
         const fontsPromise = document.fonts ? document.fonts.ready : Promise.resolve();
           
-        return Promise.all([...imagePromises, windowLoadPromise, fontsPromise]);
+        const allAssetsPromise = Promise.all([...imagePromises, windowLoadPromise, fontsPromise]);
+        
+        // Add a maximum wait time of 3000ms (3 seconds) to prevent infinite hang at 100%
+        const timeoutPromise = new Promise(resolve => setTimeout(resolve, 3000));
+        
+        return Promise.race([allAssetsPromise, timeoutPromise]);
       };
 
       waitForAssets().then(() => {
